@@ -157,20 +157,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* numpad layer
  * ,-----------------------------------------------------------------------------------.
- * |      |      |      |      |      |      |      |      |   7  |   8  |   9  |   +  |
+ * |      |      |      |      |      |      |      |   7  |   8  |   9  |   +  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Exit |      |      |      |      |      |      |      |   4  |   5  |   6  |   -  |
+ * | Exit | Ins  | Home |Pg Up |      |  UP  |      |   4  |   5  |   6  |   -  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |NumLck|      |      |      |      |      |      |      |   1  |   2  |   3  |   *  |
+ * |      | Del  | End  |Pg Dn |  <-  | DOWN |  ->  |   1  |   2  |   3  |   *  | Enter|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Exit |      |      |      |      |      |      |      |   0  |   ,  |  =   |   /  |
+ * | Exit |      |      |      |      |      |      |   0  |   ,  |  =   |   /  |NumLck|
  * `-----------------------------------------------------------------------------------'
  */
 [_NUMPAD] = LAYOUT_planck_grid(
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_P7, KC_P8,   KC_P9,   KC_PPLS,
-    EXT_NUM, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_P4, KC_P5,   KC_P6,   KC_PMNS,
-    KC_NLCK, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_P1, KC_P2,   KC_P3,   KC_PAST,
-    EXT_NUM, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_P0, KC_PCMM, KC_PEQL, KC_PSLS
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_P7, KC_P8,   KC_P9,   KC_PPLS, KC_BSPC,
+    EXT_NUM, KC_INS,  KC_HOME, KC_PGUP, XXXXXXX, KC_UP,   XXXXXXX,  KC_P4, KC_P5,   KC_P6,   KC_PMNS, XXXXXXX,
+    XXXXXXX, KC_DEL,  KC_END,  KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT,  KC_P1, KC_P2,   KC_P3,   KC_PAST, KC_ENT,
+    EXT_NUM, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  KC_P0, KC_PCMM, KC_PEQL, KC_PSLS, KC_NLCK
 ),
 
 /* Adjust (Lower + Raise)
