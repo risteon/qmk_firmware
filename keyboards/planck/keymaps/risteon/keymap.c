@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |   ~  |   !  |   @  |   #  |   $  |   %  |   ^  |   &  |   *  |   (  |   )  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |   `  |Print |      |      |      |      |  <-  | DOWN |  UP  |  ->  | Ins  |  |   |
+ * |   `  |Print |+RCTL+|+lALT+|+SHFT+|+rALT+|  <-  | DOWN |  UP  |  ->  | Ins  |  |   |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |ISO ~ |ISO | | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -113,10 +113,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_LOWER] = LAYOUT_planck_grid(
-    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR,       KC_ASTR,       KC_LPRN, KC_RPRN, KC_BSPC,
-    KC_GRV,  KC_PSCR, _______, _______, _______, _______, KC_LEFT, KC_DOWN,       KC_UP,         KC_RGHT, KC_INS,  KC_PIPE,
-    _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   LSFT(KC_NUHS), LSFT(KC_NUBS), KC_HOME, KC_END,  _______,
-    _______, _______, _______, _______, _______, _______, _______, _______,       _______,       KC_VOLD, KC_VOLU, KC_RSFT
+    KC_TILD, KC_EXLM, KC_AT,         KC_HASH,       KC_DLR,        KC_PERC,       KC_CIRC, KC_AMPR,       KC_ASTR,       KC_LPRN, KC_RPRN, KC_BSPC,
+    KC_GRV,  KC_PSCR, OSM(MOD_RCTL), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), KC_LEFT, KC_DOWN,       KC_UP,         KC_RGHT, KC_INS,  KC_PIPE,
+    _______, KC_F1,   KC_F2,         KC_F3,         KC_F4,         KC_F5,         KC_F6,   LSFT(KC_NUHS), LSFT(KC_NUBS), KC_HOME, KC_END,  _______,
+    _______, _______, _______,       _______,       _______,       _______,       _______, _______,       _______,       KC_VOLD, KC_VOLU, KC_RSFT
 ),
 
 /* Raise
@@ -141,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |      |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Quit |      | FLOAT| SHFT |      |  <-  | DOWN |  UP  |  ->  |      |      |
+ * | Exit | Quit | FLOAT|+lALT+|+SHFT+|+rALT+|  <-  | DOWN |  UP  |  ->  |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |ADJUST|Numpad|      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -150,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_WINDOW] = LAYOUT_planck_grid(
     _______, LGUI(KC_1),       LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), _______,
-    _______, LGUI(LSFT(KC_Q)),          _______, LGUI(KC_SPC), OSM(MOD_LSFT), _______, LGUI(LSFT(KC_H)),LGUI(LSFT(KC_DOWN)), LGUI(LSFT(KC_UP)), LGUI(LSFT(KC_RGHT)), _______, _______,
+    LGUI(LSFT(KC_E)), LGUI(LSFT(KC_Q)), LGUI(KC_SPC), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), LGUI(LSFT(KC_H)),LGUI(LSFT(KC_DOWN)), LGUI(LSFT(KC_UP)), LGUI(LSFT(KC_RGHT)), _______, _______,
     _______, _______,          _______, _______, _______, _______, ADJUST,  NUMPAD, _______, _______, _______, _______,
     _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
