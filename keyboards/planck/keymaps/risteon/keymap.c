@@ -150,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_WINDOW] = LAYOUT_planck_grid(
     _______, LGUI(KC_1),       LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), _______,
-    LGUI(LSFT(KC_E)), LGUI(LSFT(KC_Q)), LGUI(KC_SPC), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), LGUI(LSFT(KC_H)),LGUI(LSFT(KC_DOWN)), LGUI(LSFT(KC_UP)), LGUI(LSFT(KC_RGHT)), _______, _______,
+    LGUI(LSFT(KC_E)), LGUI(LSFT(KC_Q)), LGUI(KC_SPC), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)), LGUI(LSFT(KC_UP)), LGUI(LSFT(KC_RGHT)), _______, _______,
     _______, _______,          _______, _______, _______, _______, ADJUST,  NUMPAD, _______, _______, _______, _______,
     _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
