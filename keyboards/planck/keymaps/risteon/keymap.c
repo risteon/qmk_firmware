@@ -108,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Print|  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |ISO ~ |ISO | | Home | End  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      | Vol- | Vol+ |rShift|
+ * |      |      |      |      |      |      |Space+|      |      | Vol- | Vol+ |rShift|
  * `-----------------------------------------------------------------------------------'
  */
 
@@ -116,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TILD, KC_EXLM, KC_AT,         KC_HASH,       KC_DLR,        KC_PERC,       KC_CIRC, KC_AMPR,       KC_ASTR,       KC_LPRN, KC_RPRN, KC_BSPC,
     KC_GRV,  KC_RGUI, OSM(MOD_RCTL), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), KC_LEFT, KC_DOWN,       KC_UP,         KC_RGHT, KC_INS,  KC_PIPE,
     KC_PSCR, KC_F1,   KC_F2,         KC_F3,         KC_F4,         KC_F5,         KC_F6,   LSFT(KC_NUHS), LSFT(KC_NUBS), KC_HOME, KC_END,  _______,
-    _______, _______, _______,       _______,       _______,       _______,       _______, _______,       _______,       KC_VOLD, KC_VOLU, KC_RSFT
+    _______, _______, _______,       _______,       _______,       _______,       C_S_T(KC_SPC),  _______,       _______,       KC_VOLD, KC_VOLU, KC_RSFT
 ),
 
 /* Raise
