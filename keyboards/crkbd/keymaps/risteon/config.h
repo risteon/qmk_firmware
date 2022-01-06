@@ -22,6 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //#define USE_MATRIX_I2C
 
+// use together with EXTRAFLAGS += -flto
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
 /* Select hand configuration */
@@ -35,6 +36,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 150
+#define PERMISSIVE_HOLD
 
 #ifdef RGBLIGHT_ENABLE
     #undef RGBLED_NUM
