@@ -38,8 +38,10 @@ QWERTY = SAFE_RANGE,
   EXT_ADJ
 };
 
-#define LOWER MO(_LOWER)
-#define RAISE MO(_RAISE)
+#define LOWER LT(_LOWER, KC_TAB)
+#define RAISE LT(_RAISE, KC_ENT)
+//#define LOWER MO(_LOWER)
+//#define RAISE MO(_RAISE)
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -189,6 +191,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 #ifdef OLED_ENABLE
+// Todo: process_record_user would be defined twice
+
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
