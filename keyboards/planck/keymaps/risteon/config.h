@@ -16,6 +16,15 @@
 
 #pragma once
 
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
+
+// tap-hold config
+#define TAPPING_FORCE_HOLD
+#define TAPPING_TERM 150
+#define PERMISSIVE_HOLD
+
+
 #ifdef AUDIO_ENABLE
 #    define STARTUP_SONG SONG(PLANCK_SOUND)
 // #define STARTUP_SONG SONG(NO_SOUND)
