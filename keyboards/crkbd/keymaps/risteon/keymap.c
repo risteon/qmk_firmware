@@ -35,7 +35,9 @@ QWERTY = SAFE_RANGE,
   ADJUST,
   BACKLIT,
   EXT_NUM,
-  EXT_ADJ
+  EXT_ADJ,
+  TEST_1,
+  TEST_2
 };
 
 #define LOWER LT(_LOWER, KC_TAB)
@@ -143,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,------------------------------------------  ------------------------------------------.
  * |      | Reset|Debug | RGB  |RGBMOD| HUE+ |  | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
  * |------+------+------+------+------+------+  +------+------+------+------+------+------|
- * | Exit |      |MUSmod|      |      |AGnorm|  |AGswap|      |      |      |      |      |
+ * | Exit |      |MUSmod| TEST1| TEST2|AGnorm|  |AGswap|      |      |      |      |      |
  * |------+------+------+------+------+------+  +------+------+------+------+------+------|
  * |      |      |      |      |      |      |  |      |      |      |      |      |      |
  * |------+------+------+------+------+------+  +------+------+------+------+------+------|
@@ -154,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI,                      RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      EXT_ADJ, _______, MU_MOD, _______, _______,  AG_NORM,                      AG_SWAP, _______, _______, _______, _______, _______,
+      EXT_ADJ, _______, MU_MOD,  TEST_1,  TEST_2,  AG_NORM,                      AG_SWAP, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -183,6 +185,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case EXT_ADJ:
       if (record->event.pressed) {
         layer_off(_ADJUST);
+      }
+      return false;
+      break;
+    case TEST_1:
+      if (record->event.pressed) {
+        rgb_matrix_enable_noeeprom();
+      }
+      return false;
+      break;
+    case TEST_2:
+      if (record->event.pressed) {
+        rgb_matrix_disable_noeeprom();
       }
       return false;
       break;
