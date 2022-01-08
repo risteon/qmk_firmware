@@ -57,6 +57,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // bug in rgb_matrix.c? slave half does not work well with this
 //#   define RGB_DISABLE_TIMEOUT 12000
 #   define RGB_DISABLE_WHEN_USB_SUSPENDED // turn off effects when suspended
+#   define RGBLIGHT_SLEEP  // allows us to use rgblight_suspend() and rgblight_wakeup() in keymap.c
+#   define RGBLIGHT_TIMEOUT 300000  // ms
+
 #   define RGB_MATRIX_FRAMEBUFFER_EFFECTS
 // #   define RGB_MATRIX_LED_PROCESS_LIMIT (DRIVER_LED_TOTAL + 4) / 5 // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)
 // #   define RGB_MATRIX_LED_FLUSH_LIMIT 16 // limits in milliseconds how frequently an animation will update the LEDs. 16 (16ms) is equivalent to limiting to 60fps (increases keyboard responsiveness)
