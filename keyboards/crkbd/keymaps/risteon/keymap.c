@@ -154,13 +154,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
   [_ADJUST] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      _______, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI,                      RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______,
+      XXXXXXX, RESET,   DEBUG,   RGB_TOG, RGB_MOD, RGB_HUI,                      RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      EXT_ADJ, _______, MU_MOD,  TEST_1,  TEST_2,  AG_NORM,                      AG_SWAP, _______, _______, _______, _______, _______,
+      EXT_ADJ, XXXXXXX, MU_MOD,  TEST_1,  TEST_2,  AG_NORM,                      AG_SWAP, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      _______, _______, _______, _______, _______, _______,                      _______, _______, _______, _______, _______, _______,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          _______, _______, _______,    _______, _______, _______
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   )
 
@@ -237,13 +237,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       break;
     case TEST_1:
       if (record->event.pressed) {
-        rgb_matrix_enable_noeeprom();
       }
       return false;
       break;
     case TEST_2:
       if (record->event.pressed) {
-        rgb_matrix_disable_noeeprom();
       }
       return false;
       break;
