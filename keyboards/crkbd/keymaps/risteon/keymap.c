@@ -190,7 +190,9 @@ void check_rgb_timeout() {
 /* Runs at the end of each scan loop, check if RGB timeout has occured */
 void housekeeping_task_user(void) {
   #ifdef RGBLIGHT_TIMEOUT
-  check_rgb_timeout();
+  if (rgb_matrix_is_enabled()) {
+    check_rgb_timeout();
+  }
   #endif
   
 }
