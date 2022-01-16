@@ -146,16 +146,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | Exit | Quit | FLOAT|+lALT+|+SHFT+|+rALT+|  <-  | DOWN |  UP  |  ->  |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |ADJUST|Numpad|      |      |      |      |
+ * |      | Bri- | Bri+ | Vol- | Vol+ |+LCTL+|ADJUST|Numpad|      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_WINDOW] = LAYOUT_planck_grid(
-    KC_CAPS, LGUI(KC_1),       LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), _______,
-    LGUI(LSFT(KC_E)), LGUI(LSFT(KC_Q)), LGUI(KC_SPC), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)), LGUI(LSFT(KC_UP)), LGUI(LSFT(KC_RGHT)), _______, _______,
-    _______, _______,          _______, _______, _______, _______, ADJUST,  NUMPAD, _______, _______, _______, _______,
-    _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+    KC_CAPS,  LGUI(KC_1),  LGUI(KC_2),   LGUI(KC_3),   LGUI(KC_4),   LGUI(KC_5),  LGUI(KC_6),  LGUI(KC_7),LGUI(KC_8),  LGUI(KC_9),LGUI(KC_0), _______,
+    LSG(KC_E), LSG(KC_Q),LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),LSG(KC_LEFT),LSG(KC_DOWN),LSG(KC_UP),LSG(KC_RGHT),   _______, _______,
+    _______,     KC_BRID,     KC_BRIU,     KC_VOLD,       KC_VOLU,OSM(MOD_LCTL),      ADJUST,      NUMPAD,   _______,     _______,   _______, _______,
+    _______,     _______,     _______,     _______,       _______,      _______,     _______,     _______,   _______,     _______,   _______, _______
 ),
 
 /* numpad layer
