@@ -31,6 +31,7 @@
 #define RGBLIGHT_EFFECT_BREATHING
 // turn off when suspended
 #define RGB_DISABLE_WHEN_USB_SUSPENDED
+#define RGBLIGHT_SLEEP
 
 
 #ifdef AUDIO_ENABLE
