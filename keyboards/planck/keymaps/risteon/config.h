@@ -20,7 +20,9 @@
 #define NO_ACTION_FUNCTION
 
 // tap-hold config
-#define TAPPING_FORCE_HOLD
+// #define TAPPING_FORCE_HOLD
+// Disable TAPPING_FORCE_HOLD only for meta-bksp mod tap
+#define TAPPING_FORCE_HOLD_PER_KEY
 #define TAPPING_TERM 150
 #define PERMISSIVE_HOLD
 #define HOLD_ON_OTHER_KEY_PRESS

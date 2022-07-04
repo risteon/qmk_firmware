@@ -57,14 +57,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |  -_  |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | mute | Ctrl | Alt  | Ctrl |Lower |Shift |Space |Raise | GUI  | rAlt |rCtrl | Copy |
+ * | mute | Ctrl | Alt  | Ctrl |Lower |Shift |Space |Raise |GUI/Bk| rAlt |rCtrl | Copy |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     LALT_T(KC_ESC),   KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RALT_T(KC_QUOT),
     KC_MINS,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,
-    KC_MUTE,  KC_LCTL, KC_LALT, KC_LCTL, LOWER,   KC_LSFT, KC_SPC,  RAISE,   KC_LGUI, KC_RALT, KC_RCTL, KC_COPY
+    KC_MUTE,  KC_LCTL, KC_LALT, KC_LCTL, LOWER,   KC_LSFT, KC_SPC,  RAISE,   LGUI_T(KC_BSPC), KC_RALT, KC_RCTL, KC_COPY
 ),
 
 /* Colemak
@@ -201,6 +201,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   float plover_song[][2]     = SONG(PLOVER_SOUND);
   float plover_gb_song[][2]  = SONG(PLOVER_GOODBYE_SOUND);
 #endif
+
+// Delete is backspace on shift. ko_make_basic supports the mod tap
+const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, LGUI_T(KC_BSPC), KC_DEL);
+
+// This globally defines all key overrides to be used
+const key_override_t **key_overrides = (const key_override_t *[]){
+  &delete_key_override,
+  NULL // Null terminate the array of overrides!
+};
+
+// Disable tapping force hold option for LGUI_T(KC_BSPC)
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LGUI_T(KC_BSPC):
+      return false;
+    default:
+      return true;
+  }
+}
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _WINDOW);
