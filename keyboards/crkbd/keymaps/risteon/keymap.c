@@ -215,12 +215,22 @@ void post_encoder_update_user(uint8_t index, bool clockwise) {
 
 // Delete is backspace on shift. ko_make_basic supports the mod tap
 const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, LGUI_T(KC_BSPC), KC_DEL);
-
 // This globally defines all key overrides to be used
 const key_override_t **key_overrides = (const key_override_t *[]){
     &delete_key_override,
     NULL // Null terminate the array of overrides!
 };
+
+// Disable tapping force hold option for LGUI_T(KC_BSPC)
+bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LGUI_T(KC_BSPC):
+            return false;
+        default:
+            return true;
+    }
+}
+
 
 layer_state_t layer_state_set_user(layer_state_t state) {
   return update_tri_layer_state(state, _LOWER, _RAISE, _WINDOW);

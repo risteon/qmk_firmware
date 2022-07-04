@@ -34,7 +34,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL_PD2
 
-#define TAPPING_FORCE_HOLD
+// #define TAPPING_FORCE_HOLD
+// Disable TAPPING_FORCE_HOLD only for meta-bksp mod tap
+#define TAPPING_FORCE_HOLD_PER_KEY
 #define TAPPING_TERM 150
 #define PERMISSIVE_HOLD
 #define HOLD_ON_OTHER_KEY_PRESS
@@ -85,7 +87,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define ENABLE_RGB_MATRIX_BAND_VAL
 //#    define ENABLE_RGB_MATRIX_BAND_PINWHEEL_SAT
 #    define DISABLE_RGB_MATRIX_BAND_PINWHEEL_SAT
-#    define ENABLE_RGB_MATRIX_BAND_PINWHEEL_VAL
+//#    define ENABLE_RGB_MATRIX_BAND_PINWHEEL_VAL
+#    define DISABLE_RGB_MATRIX_BAND_PINWHEEL_VAL
 //#    define ENABLE_RGB_MATRIX_BAND_SPIRAL_SAT
 #    define DISABLE_RGB_MATRIX_BAND_SPIRAL_SAT
 //#    define ENABLE_RGB_MATRIX_BAND_SPIRAL_VAL
@@ -100,7 +103,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define DISABLE_RGB_MATRIX_CYCLE_OUT_IN_DUAL
 //#    define ENABLE_RGB_MATRIX_CYCLE_PINWHEEL
 #    define DISABLE_RGB_MATRIX_CYCLE_PINWHEEL
-#    define ENABLE_RGB_MATRIX_CYCLE_SPIRAL
+//#    define ENABLE_RGB_MATRIX_CYCLE_SPIRAL
+#    define DISABLE_RGB_MATRIX_CYCLE_SPIRAL
 //#    define ENABLE_RGB_MATRIX_DUAL_BEACON
 #    define DISABLE_RGB_MATRIX_DUAL_BEACON
 #    define ENABLE_RGB_MATRIX_RAINBOW_BEACON
@@ -121,7 +125,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
 #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE
 #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
-#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
+//#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
+#    define DISABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
 #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_CROSS
 #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTICROSS
 #    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_NEXUS
