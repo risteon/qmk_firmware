@@ -16,12 +16,18 @@
 
 #pragma once
 
+// use together with EXTRAFLAGS += -flto
+#define NO_ACTION_MACRO
+#define NO_ACTION_FUNCTION
+
 #ifdef OLED_ENABLE
 #    define OLED_DISPLAY_128X64
 #endif
-// Lets you roll mod-tap keys
-#define IGNORE_MOD_TAP_INTERRUPT
-#define TAPPING_FORCE_HOLD
+
+// Disable TAPPING_FORCE_HOLD only for meta-bksp mod tap
+#define TAPPING_FORCE_HOLD_PER_KEY
+#define TAPPING_TERM 150
+#define PERMISSIVE_HOLD
 #define HOLD_ON_OTHER_KEY_PRESS
 
 #define SPLIT_WPM_ENABLE
