@@ -572,7 +572,7 @@ bool oled_task_user(void) {
         // clang-format on
 
         oled_write_P(qmk_logo, false);
-        oled_write_P(PSTR("Keymap: sbmueller\n\n"), false);
+        oled_write_P(PSTR("Keymap: risteon\n\n"), false);
 
         // Host Keyboard Layer Status
         oled_write_P(PSTR("Layer: "), false);
