@@ -104,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TILD, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
  KC_GRV,KC_RGUI,OSM(MOD_RCTL),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),                        KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT,  KC_INS, KC_PIPE,
       KC_PSCR, KC_F1,   KC_F2,    KC_F3,    KC_F4,   KC_F5, _______, _______, _______, _______, KC_F6,LSFT(KC_NUHS),LSFT(KC_NUBS),KC_HOME,KC_END,_______,
-                                _______, _______,  _______, _______, _______,LCTL(KC_LSFT), _______, _______, _______, _______
+                                _______, _______,  _______, _______, _______, _______,LCTL(KC_LSFT), _______, _______, _______
     ),
 
 /*
@@ -603,9 +603,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         // Page up/Page down
         if (clockwise) {
-            tap_code(KC_PGDN);
+            tap_code(KC_WH_U);
         } else {
-            tap_code(KC_PGUP);
+            tap_code(KC_WH_D);
         }
     }
     return false;
