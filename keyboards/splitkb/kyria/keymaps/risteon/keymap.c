@@ -594,18 +594,46 @@ bool oled_task_user(void) {
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        // Volume control
-        if (clockwise) {
-            tap_code(KC_VOLU);
-        } else {
-            tap_code(KC_VOLD);
+        if(IS_LAYER_ON(_RAISE)) {
+          // Brightness control
+          if (clockwise) {
+              tap_code(KC_BRIU);
+          } else {
+              tap_code(KC_BRID);
+          }
+        }
+        else if(IS_LAYER_ON(_ADJUST)) {
+          // Brightness control
+          if (clockwise) {
+              rgblight_increase_val();
+          } else {
+              rgblight_decrease_val();
+          }
+        }
+        else { // default
+          // Volume control
+          if (clockwise) {
+              tap_code(KC_VOLU);
+          } else {
+              tap_code(KC_VOLD);
+          }
         }
     } else if (index == 1) {
-        // Page up/Page down
-        if (clockwise) {
-            tap_code(KC_WH_U);
-        } else {
-            tap_code(KC_WH_D);
+        if(IS_LAYER_ON(_ADJUST)) {
+          // Brightness control
+          if (clockwise) {
+              rgblight_increase_hue();
+          } else {
+              rgblight_increase_hue();
+          }
+        }
+        else {
+          // Default: Scrollwheel
+          if (clockwise) {
+              tap_code(KC_WH_U);
+          } else {
+              tap_code(KC_WH_D);
+          }
         }
     }
     return false;
