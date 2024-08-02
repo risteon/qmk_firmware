@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,------------------------------------------  ------------------------------------------.
      * |      |   1  |   2  |   3  |   4  |   5  |  |   6  |   7  |   8  |   9  |   0  | Bksp |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
-     * | Del  |   (  |   )  |   {  |   }  |      |  |      |  -_  |  =+  |   [  |   ]  |  \   |
+     * | Del  |   (  |   )  |   {  |   }  | Del  |  |      |  -_  |  =+  |   [  |   ]  |  \   |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
      * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  |  F12 |ISO # |ISO / |Pg Dn |Pg Up |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
@@ -91,7 +91,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         _______, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSPC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_DEL, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, _______, _______, KC_MINS, KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
+        KC_DEL, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_DEL, _______, KC_MINS, KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         _______, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_NUHS, KC_NUBS, KC_PGDN, KC_PGUP, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -193,13 +193,14 @@ void post_encoder_update_user(uint8_t index, bool clockwise) {
 #endif
 }
 
+// Remove shift+bksp = del for now
 // Delete is backspace on shift. ko_make_basic supports the mod tap
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, LGUI_T(KC_BSPC), KC_DEL);
+// const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, LGUI_T(KC_BSPC), KC_DEL);
 // This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
-    &delete_key_override,
-    NULL // Null terminate the array of overrides!
-};
+// const key_override_t **key_overrides = (const key_override_t *[]){
+// &delete_key_override,
+// NULL // Null terminate the array of overrides!
+// };
 
 // Disable tapping force hold option for LGUI_T(KC_BSPC)
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
