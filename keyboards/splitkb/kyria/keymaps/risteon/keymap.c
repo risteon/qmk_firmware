@@ -31,27 +31,27 @@ enum layers {
 };
 
 enum kyria_keycodes {
-QWERTY = SAFE_RANGE,
-  NUMPAD,
-  ADJUST_HOLD,
-  EXT_NUM,
-  EXT_ADJ,
+    QWERTY = SAFE_RANGE,
+    NUMPAD,
+    ADJUST_HOLD,
+    EXT_NUM,
+    EXT_ADJ,
 };
 
 // Aliases for readability
 #define QWERTY DF(_QWERTY)
-//#define COLEMAK DF(_COLEMAK_DH)
-//#define DVORAK DF(_DVORAK)
+// #define COLEMAK DF(_COLEMAK_DH)
+// #define DVORAK DF(_DVORAK)
 
-//#define SYM MO(_SYM)
-//#define NAV MO(_NAV)
-//#define FKEYS MO(_NUMBERS)
+// #define SYM MO(_SYM)
+// #define NAV MO(_NAV)
+// #define FKEYS MO(_NUMBERS)
 #define ADJUST MO(_ADJUST)
 
-//#define CTL_ESC MT(MOD_LCTL, KC_ESC)
-//#define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
-//#define CTL_MINS MT(MOD_RCTL, KC_MINUS)
-//#define ALT_ENT MT(MOD_LALT, KC_ENT)
+// #define CTL_ESC MT(MOD_LCTL, KC_ESC)
+// #define CTL_QUOT MT(MOD_RCTL, KC_QUOTE)
+// #define CTL_MINS MT(MOD_RCTL, KC_MINUS)
+// #define ALT_ENT MT(MOD_LALT, KC_ENT)
 #define ALT_ESC LALT_T(KC_ESC)
 #define ALT_QUOT RALT_T(KC_QUOT)
 
@@ -571,46 +571,43 @@ bool oled_task_user(void) {
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
     if (index == 0) {
-        if(IS_LAYER_ON(_RAISE)) {
-          // Brightness control
-          if (clockwise) {
-              tap_code(KC_BRIU);
-          } else {
-              tap_code(KC_BRID);
-          }
-        }
-        else if(IS_LAYER_ON(_ADJUST)) {
-          // Brightness control
-          if (clockwise) {
-              rgblight_increase_val();
-          } else {
-              rgblight_decrease_val();
-          }
-        }
-        else { // default
-          // Volume control
-          if (clockwise) {
-              tap_code(KC_VOLU);
-          } else {
-              tap_code(KC_VOLD);
-          }
+        if (IS_LAYER_ON(_RAISE)) {
+            // Brightness control
+            if (clockwise) {
+                tap_code(KC_BRIU);
+            } else {
+                tap_code(KC_BRID);
+            }
+        } else if (IS_LAYER_ON(_ADJUST)) {
+            // Brightness control
+            if (clockwise) {
+                rgblight_increase_val();
+            } else {
+                rgblight_decrease_val();
+            }
+        } else { // default
+            // Volume control
+            if (clockwise) {
+                tap_code(KC_VOLU);
+            } else {
+                tap_code(KC_VOLD);
+            }
         }
     } else if (index == 1) {
-        if(IS_LAYER_ON(_ADJUST)) {
-          // Brightness control
-          if (clockwise) {
-              rgblight_increase_hue();
-          } else {
-              rgblight_decrease_hue();
-          }
-        }
-        else {
-          // Default: Scrollwheel
-          if (clockwise) {
-              tap_code(KC_WH_U);
-          } else {
-              tap_code(KC_WH_D);
-          }
+        if (IS_LAYER_ON(_ADJUST)) {
+            // Brightness control
+            if (clockwise) {
+                rgblight_increase_hue();
+            } else {
+                rgblight_decrease_hue();
+            }
+        } else {
+            // Default: Scrollwheel
+            if (clockwise) {
+                tap_code(KC_WH_U);
+            } else {
+                tap_code(KC_WH_D);
+            }
         }
     }
     return false;
@@ -623,21 +620,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         anim_sleep = timer_read32();
     }
     switch (keycode) {
-      case ADJUST_HOLD:
-        if (record->event.pressed) {
-          layer_off(_RAISE);
-          layer_off(_LOWER);
-          layer_off(_WINDOW);
-          layer_on(_ADJUST);
-        }
-        return false;
-        break;
-      case EXT_ADJ:
-        if (record->event.pressed) {
-          layer_off(_ADJUST);
-        }
-        return false;
-        break;
+        case ADJUST_HOLD:
+            if (record->event.pressed) {
+                layer_off(_RAISE);
+                layer_off(_LOWER);
+                layer_off(_WINDOW);
+                layer_on(_ADJUST);
+            }
+            return false;
+            break;
+        case EXT_ADJ:
+            if (record->event.pressed) {
+                layer_off(_ADJUST);
+            }
+            return false;
+            break;
     }
     return true;
 };
@@ -649,7 +646,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 //     &delete_key_override,
 //     NULL // Null terminate the array of overrides!
 // };
-// 
+//
 // Disable tapping force hold option for LGUI_T(KC_BSPC)
 bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -660,7 +657,6 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
     }
 }
 
-
 layer_state_t layer_state_set_user(layer_state_t state) {
-  return update_tri_layer_state(state, _LOWER, _RAISE, _WINDOW);
+    return update_tri_layer_state(state, _LOWER, _RAISE, _WINDOW);
 }
