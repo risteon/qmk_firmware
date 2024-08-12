@@ -1,7 +1,8 @@
 OLED_ENABLE = yes
 OLED_DRIVER = ssd1306   # Enables the use of OLED displays
 ENCODER_ENABLE = yes       # Enables the use of one or more encoders
-RGBLIGHT_ENABLE = yes      # Enable keyboard RGB underglow
+RGBLIGHT_ENABLE = yes
+RGB_MATRIX_ENABLE = no
 WPM_ENABLE = yes # Enable words per minute calculation
 EXTRAFLAGS += -flto
 CONSOLE_ENABLE = no
