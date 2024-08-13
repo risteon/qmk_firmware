@@ -581,12 +581,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 tap_code(KC_BRID);
             }
         } else if (IS_LAYER_ON(_ADJUST)) {
+#    if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
             // Brightness control
             if (clockwise) {
                 rgblight_increase_val();
             } else {
                 rgblight_decrease_val();
             }
+#    endif
         } else { // default
             // Volume control
             if (clockwise) {
@@ -597,12 +599,14 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (IS_LAYER_ON(_ADJUST)) {
+#    if defined(RGBLIGHT_ENABLE) || defined(RGB_MATRIX_ENABLE)
             // Brightness control
             if (clockwise) {
                 rgblight_increase_hue();
             } else {
                 rgblight_decrease_hue();
             }
+#    endif
         } else {
             // Default: Scrollwheel
             if (clockwise) {
