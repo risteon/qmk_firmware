@@ -30,13 +30,7 @@ enum layers {
     _ADJUST,
 };
 
-enum kyria_keycodes {
-    QWERTY = SAFE_RANGE,
-    NUMPAD,
-    ADJUST_HOLD,
-    EXT_NUM,
-    EXT_ADJ,
-};
+enum kyria_keycodes { QWERTY, ADJUST_HOLD, EXT_ADJ, INVALID = SAFE_RANGE };
 
 // Aliases for readability
 #define QWERTY DF(_QWERTY)
@@ -58,6 +52,9 @@ enum kyria_keycodes {
 #define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ENT)
 
+// TODO: derive from rev2 spec?
+#define KYRIA_LED_COUNT 20
+
 // Note: LAlt/Enter (ALT_ENT) is not the same thing as the keyboard shortcut Alt+Enter.
 // The notation `mod/tap` denotes a key that activates the modifier `mod` when held down, and
 // produces the key `tap` when tapped (i.e. pressed and released).
@@ -68,7 +65,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Base Layer: QWERTY
  *
  * ,-------------------------------------------.                              ,-------------------------------------------.
- * |  Tab   |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |  Bksp  |
+ * |        |   Q  |   W  |   E  |   R  |   T  |                              |   Y  |   U  |   I  |   O  |   P  |        |
  * |--------+------+------+------+------+------|                              |------+------+------+------+------+--------|
  * |  L-ALT |   A  |   S  |   D  |   F  |   G  |                              |   H  |   J  |   K  |   L  | ;  : |  R-ALT |
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
@@ -78,10 +75,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
-     XXXXXXX,  KC_Q, KC_W, KC_E,     KC_R,    KC_T,                                       KC_Y,   KC_U,    KC_I,    KC_O,   KC_P,   XXXXXXX,
+     INVALID,  KC_Q, KC_W, KC_E,     KC_R,    KC_T,                                       KC_Y,   KC_U,    KC_I,    KC_O,   KC_P,   INVALID,
      KC_LALT, KC_A, KC_S, KC_D,     KC_F,    KC_G,                                       KC_H,   KC_J,    KC_K,    KC_L,   KC_SCLN, KC_RALT,
-     XXXXXXX, KC_Z, KC_X, KC_C,     KC_V,    KC_B,  _______,  ADJUST,  ADJUST, _______,  KC_N,  KC_M,    KC_COMM, KC_DOT, KC_SLSH, XXXXXXX,
-                          KC_MUTE, LCTL_T(KC_ESC), LOWER, KC_LSFT, _______, _______,  KC_SPC, RAISE, LGUI_T(KC_BSPC), _______
+     INVALID, KC_Z, KC_X, KC_C,     KC_V,    KC_B,  INVALID,  ADJUST,  ADJUST, INVALID,  KC_N,  KC_M,    KC_COMM, KC_DOT, KC_SLSH, INVALID,
+                          KC_MUTE, LCTL_T(KC_ESC), LOWER, KC_LSFT, INVALID, INVALID,  KC_SPC, RAISE, LGUI_T(KC_BSPC), INVALID
     ),
 
 
@@ -100,10 +97,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                        `--------------------------------'  `----------------------------------'
  */
     [_LOWER] = LAYOUT(
-      XXXXXXX, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, XXXXXXX,
- XXXXXXX,KC_RGUI,OSM(MOD_RCTL),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),                        KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_TILD, XXXXXXX,
-      KC_PSCR, KC_F1,   KC_F2,    KC_F3,    KC_F4,   KC_F5, _______, _______, _______, _______, KC_F6,   KC_GRV , KC_PIPE, KC_HOME, KC_END,  XXXXXXX,
-                                _______, _______,  _______, _______, _______, _______,LCTL(KC_LSFT), _______, _______, _______
+      INVALID, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, INVALID,
+ INVALID,KC_RGUI,OSM(MOD_RCTL),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),                        KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_TILD, INVALID,
+      KC_PSCR, KC_F1,   KC_F2,    KC_F3,    KC_F4,   KC_F5, INVALID, INVALID, INVALID, INVALID, KC_F6,   KC_GRV , KC_PIPE, KC_HOME, KC_END,  INVALID,
+                                _______, _______,  _______, _______, INVALID, INVALID,LCTL(KC_LSFT), _______, _______, INVALID
     ),
 
 /*
@@ -121,10 +118,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      XXXXXXX,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
-      XXXXXXX, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR,  KC_DEL,                                     KC_BSLS, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, XXXXXXX,
-      XXXXXXX,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, _______, _______, _______, _______, KC_F12,  KC_QUOT, KC_NUBS, KC_PGDN, KC_PGUP, XXXXXXX,
-                                 _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
+      INVALID,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
+      INVALID, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR,  KC_DEL,                                     KC_BSLS, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, INVALID,
+      INVALID,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, INVALID, INVALID, INVALID, INVALID, KC_F12,  KC_QUOT, KC_NUBS, KC_PGDN, KC_PGUP, INVALID,
+                                 _______, _______, _______, _______, INVALID, INVALID, _______, _______, _______, INVALID
     ),
 
 /*
@@ -142,10 +139,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_WINDOW] = LAYOUT(
- KC_CAPS,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),XXXXXXX,
- LGUI(LSFT(KC_E)),LGUI(LSFT(KC_Q)),LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), XXXXXXX,
-      XXXXXXX, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, OSM(MOD_LCTL), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ADJUST_HOLD, XXXXXXX, KC_PSCR, KC_INS, KC_CAPS, XXXXXXX,
-                                  _______, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______
+ KC_CAPS,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
+ LGUI(LSFT(KC_E)),LGUI(LSFT(KC_Q)),LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
+      INVALID, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, OSM(MOD_LCTL), INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, KC_PSCR, KC_INS, KC_CAPS, INVALID,
+                                  _______, _______, _______, _______, _______, INVALID, INVALID, _______, _______, INVALID
     ),
 
 /*
@@ -164,10 +161,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_ADJUST] = LAYOUT(
-      _______, QK_BOOT, _______, RGB_TOG, RGB_MOD, RGB_HUI,                                     RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______,
-      EXT_ADJ, _______, _______, _______, _______, _______,                                     _______, _______, _______, _______, _______, _______,
-      _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-                                 _______, _______, _______, _______, EE_CLR , EE_CLR , _______, _______, _______, _______
+      XXXXXXX, QK_BOOT, XXXXXXX, RGB_TOG, RGB_MOD, RGB_HUI,                                     RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                 XXXXXXX, EXT_ADJ, XXXXXXX, XXXXXXX, EE_CLR , EE_CLR , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
 // /*
@@ -524,3 +521,22 @@ bool get_tapping_force_hold(uint16_t keycode, keyrecord_t *record) {
 layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, _LOWER, _RAISE, _WINDOW);
 }
+
+#ifdef RGBLIGHT_LAYER_BLINK
+const rgblight_segment_t PROGMEM        _no_layer[]   = RGBLIGHT_LAYER_SEGMENTS({0, KYRIA_LED_COUNT, HSV_RED});
+const rgblight_segment_t *const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(_no_layer);
+
+void keyboard_post_init_user(void) {
+    rgblight_layers = _rgb_layers;
+}
+
+// Note we user post_process_record_user because we want the state
+// after the flag has been flipped...
+void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case INVALID:
+            rgblight_blink_layer(0, 250);
+            break;
+    }
+}
+#endif // RGBLIGHT_LAYER_BLINK

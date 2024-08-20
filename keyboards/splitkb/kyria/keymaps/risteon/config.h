@@ -43,9 +43,12 @@
 #define ENCODER_RESOLUTION 2
 
 #ifdef RGBLIGHT_ENABLE
+// layers
+#    define RGBLIGHT_LAYERS
+#    define RGBLIGHT_LAYER_BLINK
 // RGB config
 #    define RGBLIGHT_EFFECT_STATIC_GRADIENT
-#    define RGBLIGHT_EFFECT_RAINBOW_MOOD
+// #    define RGBLIGHT_EFFECT_RAINBOW_MOOD
 // turn off when suspended
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED
 #    define RGBLIGHT_SLEEP
