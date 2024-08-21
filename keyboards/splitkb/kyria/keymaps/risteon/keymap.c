@@ -30,7 +30,7 @@ enum layers {
     _ADJUST,
 };
 
-enum kyria_keycodes { QWERTY, ADJUST_HOLD, EXT_ADJ, INVALID = SAFE_RANGE };
+enum kyria_keycodes { QWERTY = SAFE_RANGE, ADJUST_HOLD, EXT_ADJ, INVALID };
 
 // Aliases for readability
 #define QWERTY DF(_QWERTY)
@@ -93,7 +93,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Print|  F1  |  F2  |  F3  |  F4  |  F5  |      |      |  |      |      |  F6  |  `   |   |  | Home | End  |      |
  * `------+------+------+------+------+------+-------------|  |-------------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      | Ctrl |      |      |      |
- *                      |      |      |      |      |      |  |      | Shft |      |      |      |
+ *                      |      |      |      |      |      |  |      | Shift|      |      |      |
  *                        `--------------------------------'  `----------------------------------'
  */
     [_LOWER] = LAYOUT(
@@ -107,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Raise
  *
  * ,-----------------------------------------.                              ------------------------------------------.
- * |      |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |      |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |(Del) |   (  |   )  |   {  |   }  |  DEL |                              |   \  |  -_  |  =+  |   [  |   ]  |  (\) |
+ * |      |   (  |   )  |   {  |   }  |  DEL |                              |   \  |  -_  |  =+  |   [  |   ]  |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  * |      |  F7  |  F8  |  F9  |  F10 |  F11 |      |      |  |      |      |  F12 |   "  |ISO / |Pg Dn |Pg Up |      |
  * `------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
@@ -118,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_RAISE] = LAYOUT(
-      INVALID,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, KC_BSPC,
+      INVALID,    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0, INVALID,
       INVALID, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR,  KC_DEL,                                     KC_BSLS, KC_MINS,  KC_EQL, KC_LBRC, KC_RBRC, INVALID,
       INVALID,   KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11, INVALID, INVALID, INVALID, INVALID, KC_F12,  KC_QUOT, KC_NUBS, KC_PGDN, KC_PGUP, INVALID,
                                  _______, _______, _______, _______, INVALID, INVALID, _______, _______, _______, INVALID
@@ -487,6 +487,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(_LOWER);
                 layer_off(_WINDOW);
                 layer_on(_ADJUST);
+#ifdef RGBLIGHT_LAYER_BLINK
+                rgblight_blink_layer(1, 1000);
+#endif // RGBLIGHT_LAYER_BLINK
             }
             return false;
             break;
@@ -524,7 +527,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 #ifdef RGBLIGHT_LAYER_BLINK
 const rgblight_segment_t PROGMEM        _no_layer[]   = RGBLIGHT_LAYER_SEGMENTS({0, KYRIA_LED_COUNT, HSV_RED});
-const rgblight_segment_t *const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(_no_layer);
+const rgblight_segment_t PROGMEM        _adj_layer[]  = RGBLIGHT_LAYER_SEGMENTS({0, KYRIA_LED_COUNT, HSV_GREEN});
+const rgblight_segment_t *const PROGMEM _rgb_layers[] = RGBLIGHT_LAYERS_LIST(_no_layer, _adj_layer);
 
 void keyboard_post_init_user(void) {
     rgblight_layers = _rgb_layers;
