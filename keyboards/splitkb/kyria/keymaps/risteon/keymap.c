@@ -548,8 +548,10 @@ void keyboard_post_init_user(void) {
 void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case INVALID:
-            rgblight_blink_layer(0, 250);
-            break;
+            if (record->event.pressed) {
+                rgblight_blink_layer(0, 250);
+                break;
+            }
     }
 }
 #endif // RGBLIGHT_LAYER_BLINK
