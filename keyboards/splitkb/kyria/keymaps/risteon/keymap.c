@@ -24,6 +24,7 @@ enum layers {
     _LOWER,
     _RAISE,
     _WINDOW,
+    _LEFT_HAND,
     //_NAV,
     //_SYM,
     //_NUMBERS,
@@ -51,6 +52,7 @@ enum kyria_keycodes { QWERTY = SAFE_RANGE, ADJUST_HOLD, EXT_ADJ, INVALID };
 
 #define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ENT)
+#define LEFT_HAND OSL(_LEFT_HAND)
 
 // Windows/i3 defines
 #define W_QUIT LGUI(LSFT(KC_Q))
@@ -89,9 +91,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Lower
  *
  * ,-----------------------------------------.                              ,-----------------------------------------.
- * |   ~  |   !  |   @  |   #  |   $  |   %  |                              |   ^  |   &  |   *  |   (  |   )  | Bksp |
+ * |      |   !  |   @  |   #  |   $  |   %  |                              |   ^  |   &  |   *  |   (  |   )  |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |   `  | rGUI |+RCTL+|+lALT+|+SHFT+|+rALT+|                              |  <-  | DOWN |  UP  |  ->  |   ~  |  |   |
+ * |      |+rGUI+|+RCTL+|+lALT+|+SHFT+|  LH  |                              |  <-  | DOWN |  UP  |  ->  |   ~  |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  * | Print|  F1  |  F2  |  F3  |  F4  |  F5  |      |      |  |      |      |  F6  |  `   |   |  | Home | End  |      |
  * `------+------+------+------+------+------+-------------|  |-------------+------+------+------+------+------+------'
@@ -101,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_LOWER] = LAYOUT(
       INVALID, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, INVALID,
- INVALID,KC_RGUI,OSM(MOD_RCTL),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),                        KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_TILD, INVALID,
+ INVALID,OSM(KC_RGUI),OSM(MOD_RCTL),OSM(MOD_LALT),OSM(MOD_LSFT),LEFT_HAND,                  KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_TILD, INVALID,
       KC_PSCR, KC_F1,   KC_F2,    KC_F3,    KC_F4,   KC_F5, INVALID, INVALID, INVALID, INVALID, KC_F6,   KC_GRV , KC_PIPE, KC_HOME, KC_END,  INVALID,
                                 _______, _______,  _______, _______, INVALID, INVALID,LCTL(KC_LSFT), _______, _______, INVALID
     ),
@@ -131,9 +133,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * Window
  *
  * ,------------------------------------------                              ------------------------------------------.
- * | CAPS |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  |      |
+ * |      |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * | Exit | Quit | FLOAT|+lALT+|+SHFT+|+rALT+|                              |  <-  | DOWN |  UP  |  ->  | Exit |      |
+ * |      | Quit | FLOAT|+lALT+|+SHFT+|+rALT+|                              |  <-  | DOWN |  UP  |  ->  | Exit |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  * |      | Bri- | Bri+ | Vol- | Vol+ |+LCTL+|      |      |  |      |   |ADJUST_HOLD|    | Print|  INS | CAPS |      |
  * `------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
@@ -142,12 +144,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                      `----------------------------------'  `----------------------------------'
  */
     [_WINDOW] = LAYOUT(
- KC_CAPS,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
- LGUI(LSFT(KC_E)), W_QUIT,LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
+ INVALID,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
+ INVALID, W_QUIT,LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
       INVALID, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, OSM(MOD_LCTL), INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, KC_PSCR, KC_INS, KC_CAPS, INVALID,
                                   _______, _______, _______, _______, _______, INVALID, INVALID, _______, _______, INVALID
     ),
 
+/*
+ * Left hand layer:
+ *
+ *                      v-------------------------------------------------------RGB CONTROL--------------------v
+ * ,------------------------------------------                              ------------------------------------------.
+ * |      | Reset|      | RGB  |RGBMOD| HUE+ |                              | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
+ * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
+ * |      |      |      |      |      |      |                              |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
+ *                      |      | Exit |      |      |      |  |      |      |      |      |      |
+ *                      |      |      |      |      |      |  |      |      |      |      |      |
+ *                      `----------------------------------'  `----------------------------------'
+ */
+    [_LEFT_HAND] = LAYOUT(
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+    ),
 /*
  * Adjust Layer: Default layer settings, RGB
  *
@@ -408,6 +431,9 @@ bool oled_task_user(void) {
                 break; */
             case _WINDOW:
                 oled_write_P(PSTR("Navigation\n"), false);
+                break;
+            case _LEFT_HAND:
+                oled_write_P(PSTR("Left Nav\n"), false);
                 break;
             case _ADJUST:
                 oled_write_P(PSTR("Adjust\n"), false);
