@@ -52,6 +52,9 @@ enum kyria_keycodes { QWERTY = SAFE_RANGE, ADJUST_HOLD, EXT_ADJ, INVALID };
 #define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ENT)
 
+// Windows/i3 defines
+#define W_QUIT LGUI(LSFT(KC_Q))
+
 // TODO: derive from rev2 spec?
 #define KYRIA_LED_COUNT 20
 
@@ -71,14 +74,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |   Z  |   X  |   C  |   V  |   B  |      |Adjust|  |Adjust|      |   N  |   M  | ,  < | . >  | /  ? |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | Mute |Ct/Esc| Lower| Shift|      |  |      | Space| Raise|GUI/Bk|      |
+ *                        | Mute |Ct/Esc| Lower| Shift|      |  |      | Space| Raise|GUI/Bk| Quit |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
      INVALID, KC_Q, KC_W, KC_E,     KC_R,    KC_T,                                       KC_Y,   KC_U,    KC_I,    KC_O,   KC_P,   INVALID,
      KC_LALT, KC_A, KC_S, KC_D,     KC_F,    KC_G,                                       KC_H,   KC_J,    KC_K,    KC_L,   KC_SCLN, KC_RALT,
      INVALID, KC_Z, KC_X, KC_C,     KC_V,    KC_B,  INVALID,  ADJUST,  ADJUST, INVALID,  KC_N,  KC_M,    KC_COMM, KC_DOT, KC_SLSH, INVALID,
-                          KC_MUTE, LCTL_T(KC_ESC), LOWER, KC_LSFT, INVALID, INVALID,  KC_SPC, RAISE, LGUI_T(KC_BSPC), INVALID
+                          KC_MUTE, LCTL_T(KC_ESC), LOWER, KC_LSFT, INVALID, INVALID,  KC_SPC, RAISE, LGUI_T(KC_BSPC), W_QUIT
     ),
 
 
@@ -140,7 +143,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_WINDOW] = LAYOUT(
  KC_CAPS,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
- LGUI(LSFT(KC_E)),LGUI(LSFT(KC_Q)),LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
+ LGUI(LSFT(KC_E)), W_QUIT,LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
       INVALID, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, OSM(MOD_LCTL), INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, KC_PSCR, KC_INS, KC_CAPS, INVALID,
                                   _______, _______, _______, _______, _______, INVALID, INVALID, _______, _______, INVALID
     ),
@@ -152,11 +155,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,------------------------------------------                              ------------------------------------------.
  * |      | Reset|      | RGB  |RGBMOD| HUE+ |                              | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * | Exit |      |      |      |      |      |                              |      |      |      |      |      |      |
+ * |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
- *                      |      |      |      |      |      |  |      |      |      |      |      |
+ *                      |      | Exit |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
@@ -404,7 +407,7 @@ bool oled_task_user(void) {
                 oled_write_P(PSTR("Numbers\n"), false);
                 break; */
             case _WINDOW:
-                oled_write_P(PSTR("Window\n"), false);
+                oled_write_P(PSTR("Navigation\n"), false);
                 break;
             case _ADJUST:
                 oled_write_P(PSTR("Adjust\n"), false);
@@ -425,6 +428,12 @@ bool oled_task_user(void) {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
+
+#ifdef OLED_ENABLE
+    oled_on();
+    anim_sleep = timer_read32();
+#endif
+
     if (index == 0) {
         if (IS_LAYER_ON(_RAISE)) {
             // Brightness control
