@@ -135,41 +135,40 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,------------------------------------------                              ------------------------------------------.
  * |      |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |      | Quit | FLOAT|+lALT+|+SHFT+|+rALT+|                              |  <-  | DOWN |  UP  |  ->  | Exit |      |
+ * |      | Quit | FLOAT|      |      |      |                              |  <-  | DOWN |  UP  |  ->  | Exit |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      | Bri- | Bri+ | Vol- | Vol+ |+LCTL+|      |      |  |      |   |ADJUST_HOLD|    | Print|  INS | CAPS |      |
+ * |      | Bri- | Bri+ | Vol- | Vol+ |+LCTL+|      |      |  |      |      |ADJUST|      | Print|  INS | CAPS |      |
  * `------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_WINDOW] = LAYOUT(
- INVALID,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
- INVALID, W_QUIT,LGUI(KC_SPC),OSM(MOD_LALT),OSM(MOD_LSFT),OSM(MOD_RALT),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
+      INVALID,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
+      INVALID, W_QUIT,LGUI(KC_SPC),INVALID,INVALID,INVALID,          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
       INVALID, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, OSM(MOD_LCTL), INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, KC_PSCR, KC_INS, KC_CAPS, INVALID,
                                   _______, _______, _______, _______, _______, INVALID, INVALID, _______, _______, INVALID
     ),
 
 /*
- * Left hand layer:
+ * Left hand control layer:
  *
- *                      v-------------------------------------------------------RGB CONTROL--------------------v
  * ,------------------------------------------                              ------------------------------------------.
- * |      | Reset|      | RGB  |RGBMOD| HUE+ |                              | HUE- | SAT+ | SAT- |BRGTH+|BRGTH-|      |
+ * |      | GUI+Q| GUI+W| GUI+E| GUI+R|      |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |      |      |      |      |      |      |                              |      |      |      |      |      |      |
+ * |      | Quit | FLOAT|      |GU+ENT| +GUI+|                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |      |
+ * |      |      |      |G+Prin|      |      |      |      |  |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
- *                      |      | Exit |      |      |      |  |      |      |      |      |      |
+ *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_LEFT_HAND] = LAYOUT(
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                                 XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+      XXXXXXX,LGUI(KC_Q),LGUI(KC_W),LGUI(KC_E),LGUI(KC_R), XXXXXXX,                                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      INVALID,  W_QUIT,  LGUI(KC_SPC), XXXXXXX, LGUI(KC_ENT),OSM(MOD_RGUI),                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX,   XXXXXXX,LGUI(KC_PSCR), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 /*
  * Adjust Layer: Default layer settings, RGB
@@ -454,11 +453,10 @@ bool oled_task_user(void) {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
-
-#ifdef OLED_ENABLE
+#    ifdef OLED_ENABLE
     oled_on();
     anim_sleep = timer_read32();
-#endif
+#    endif
 
     if (index == 0) {
         if (IS_LAYER_ON(_RAISE)) {
@@ -516,6 +514,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     }
 #endif
     switch (keycode) {
+#ifdef RGBLIGHT_LAYER_BLINK
+        case INVALID:
+            if (record->event.pressed) {
+                rgblight_blink_layer(0, 250);
+                return false;
+                break;
+            }
+#endif // RGBLIGHT_LAYER_BLINK
         case ADJUST_HOLD:
             if (record->event.pressed) {
                 layer_off(_RAISE);
@@ -571,13 +577,13 @@ void keyboard_post_init_user(void) {
 
 // Note we user post_process_record_user because we want the state
 // after the flag has been flipped...
-void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case INVALID:
-            if (record->event.pressed) {
-                rgblight_blink_layer(0, 250);
-                break;
-            }
-    }
-}
+// void post_process_record_user(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
+//         case INVALID:
+//             if (record->event.pressed) {
+//                 rgblight_blink_layer(0, 250);
+//                 break;
+//             }
+//     }
+// }
 #endif // RGBLIGHT_LAYER_BLINK
