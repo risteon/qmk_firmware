@@ -103,7 +103,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_LOWER] = LAYOUT(
       INVALID, KC_EXLM,   KC_AT, KC_HASH,  KC_DLR, KC_PERC,                                     KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, INVALID,
- INVALID,OSM(KC_RGUI),OSM(MOD_RCTL),OSM(MOD_LALT),OSM(MOD_LSFT),LEFT_HAND,                  KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_TILD, INVALID,
+ INVALID,OSM(MOD_RGUI),OSM(MOD_RCTL),OSM(MOD_LALT),OSM(MOD_LSFT),LEFT_HAND,                  KC_LEFT, KC_DOWN,   KC_UP, KC_RGHT, KC_TILD, INVALID,
       KC_PSCR, KC_F1,   KC_F2,    KC_F3,    KC_F4,   KC_F5, INVALID, INVALID, INVALID, INVALID, KC_F6,   KC_GRV , KC_PIPE, KC_HOME, KC_END,  INVALID,
                                 _______, _______,  _______, _______, INVALID, INVALID,LCTL(KC_LSFT), _______, _______, INVALID
     ),
@@ -135,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,------------------------------------------                              ------------------------------------------.
  * |      |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |      | Quit | FLOAT|      |      |      |                              |  <-  | DOWN |  UP  |  ->  | Exit |      |
+ * |      | Quit | FLOAT|      |GU+ENT| Exit |                              |  <-  | DOWN |  UP  |  ->  |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      | Bri- | Bri+ | Vol- | Vol+ |+LCTL+|      |      |  |      |      |ADJUST|      | Print|  INS | CAPS |      |
+ * |      | Print|/FLOAT| Vol- | Vol+ |      |      |      |  |      |      |ADJUST|      |      |  INS | CAPS |      |
  * `------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
@@ -145,8 +145,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_WINDOW] = LAYOUT(
       INVALID,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
-      INVALID, W_QUIT,LGUI(KC_SPC),INVALID,INVALID,INVALID,          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),LGUI(LSFT(KC_E)), INVALID,
-      INVALID, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, OSM(MOD_LCTL), INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, KC_PSCR, KC_INS, KC_CAPS, INVALID,
+      INVALID, W_QUIT,LGUI(KC_SPC),INVALID,LGUI(KC_ENT),LSG(KC_E),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),INVALID,INVALID,
+      INVALID, KC_PSCR,LSG(KC_SPC), KC_VOLD, KC_VOLU, INVALID, INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, INVALID, KC_INS, KC_CAPS, INVALID,
                                   _______, _______, _______, _______, _______, INVALID, INVALID, _______, _______, INVALID
     ),
 
@@ -156,19 +156,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,------------------------------------------                              ------------------------------------------.
  * |      | GUI+Q| GUI+W| GUI+E| GUI+R|      |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |      | Quit | FLOAT|      |GU+ENT| +GUI+|                              |      |      |      |      |      |      |
+ * |      | Quit | FLOAT|      |GU+ENT| Exit |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      |      |      |G+Prin|      |      |      |      |  |      |      |      |      |      |      |      |      |
+ * |      | Print|/FLOAT| Vol- | Vol+ |      |      |      |  |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_LEFT_HAND] = LAYOUT(
-      XXXXXXX,LGUI(KC_Q),LGUI(KC_W),LGUI(KC_E),LGUI(KC_R), XXXXXXX,                                    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      INVALID,  W_QUIT,  LGUI(KC_SPC), XXXXXXX, LGUI(KC_ENT),OSM(MOD_RGUI),                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX,   XXXXXXX,LGUI(KC_PSCR), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-                                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
+      XXXXXXX,LGUI(KC_Q),LGUI(KC_W),LGUI(KC_E),LGUI(KC_R), XXXXXXX,                                  _______, _______, _______, _______, _______, _______,
+      INVALID,  W_QUIT,  LGUI(KC_SPC), XXXXXXX, LGUI(KC_ENT),XXXXXXX,                                _______, _______, _______, _______, _______, _______,
+      INVALID, KC_PSCR,LSG(KC_SPC), KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______,
+                                      XXXXXXX, _______, _______, _______, XXXXXXX, _______, _______, _______, _______, _______
     ),
 /*
  * Adjust Layer: Default layer settings, RGB
@@ -179,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
  * |      |      |      |      |      |      |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |  |      |      |      |      |      |      |      |      |
+ * |      | Bri- | Bri+ |      |      |      |      |      |  |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
  *                      |      | Exit |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
@@ -188,7 +188,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_ADJUST] = LAYOUT(
       XXXXXXX, QK_BOOT, XXXXXXX, RGB_TOG, RGB_MOD, RGB_HUI,                                     RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, XXXXXXX,
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                                     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                  XXXXXXX, EXT_ADJ, XXXXXXX, XXXXXXX, EE_CLR , EE_CLR , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
