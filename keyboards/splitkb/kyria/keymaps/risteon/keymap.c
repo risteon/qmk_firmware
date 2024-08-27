@@ -135,9 +135,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,------------------------------------------                              ------------------------------------------.
  * |      |   1  |   2  |   3  |   4  |   5  |                              |   6  |   7  |   8  |   9  |   0  |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |      | Quit | FLOAT|      |GU+ENT| Exit |                              |  <-  | DOWN |  UP  |  ->  |      |      |
+ * |      | Quit | FLOAT|      |GU+ENT|      |                              |  <-  | DOWN |  UP  |  ->  |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      | Print|/FLOAT| Vol- | Vol+ |      |      |      |  |      |      |ADJUST|      |      |  INS | CAPS |      |
+ * |      | Print|/FLOAT| Vol- | Vol+ | Exit |      |      |  |      |      |ADJUST|      |      |  INS | CAPS |      |
  * `------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
@@ -145,8 +145,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
     [_WINDOW] = LAYOUT(
       INVALID,LGUI(KC_1),LGUI(KC_2),LGUI(KC_3),LGUI(KC_4),LGUI(KC_5),                                    LGUI(KC_6),LGUI(KC_7),LGUI(KC_8),LGUI(KC_9),LGUI(KC_0),INVALID,
-      INVALID, W_QUIT,LGUI(KC_SPC),INVALID,LGUI(KC_ENT),LSG(KC_E),          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),INVALID,INVALID,
-      INVALID, KC_PSCR,LSG(KC_SPC), KC_VOLD, KC_VOLU, INVALID, INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, INVALID, KC_INS, KC_CAPS, INVALID,
+      INVALID, W_QUIT,LGUI(KC_SPC),INVALID,LGUI(KC_ENT),INVALID,          LGUI(LSFT(KC_LEFT)),LGUI(LSFT(KC_DOWN)),LGUI(LSFT(KC_UP)),LGUI(LSFT(KC_RGHT)),INVALID,INVALID,
+      INVALID, KC_PSCR,LSG(KC_SPC), KC_VOLD, KC_VOLU, LSG(KC_E), INVALID, INVALID, INVALID, INVALID, ADJUST_HOLD, INVALID, INVALID, KC_INS, KC_CAPS, INVALID,
                                   _______, _______, _______, _______, _______, INVALID, INVALID, _______, _______, INVALID
     ),
 
@@ -156,19 +156,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,------------------------------------------                              ------------------------------------------.
  * |      | GUI+Q| GUI+W| GUI+E| GUI+R|      |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+                              +------+------+------+------+------+------|
- * |      | Quit | FLOAT|      |GU+ENT| Exit |                              |      |      |      |      |      |      |
+ * |      | Quit | FLOAT|      |GU+ENT|      |                              |      |      |      |      |      |      |
  * |------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+------|
- * |      | Print|/FLOAT| Vol- | Vol+ |      |      |      |  |      |      |      |      |      |      |      |      |
+ * |      | Print|/FLOAT| Vol- | Vol+ | Exit |      |      |  |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------|  |------+------+------+------+------+------+------+------'
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      |      |      |      |      |      |  |      |      |      |      |      |
  *                      `----------------------------------'  `----------------------------------'
  */
     [_LEFT_HAND] = LAYOUT(
-      XXXXXXX,LGUI(KC_Q),LGUI(KC_W),LGUI(KC_E),LGUI(KC_R), XXXXXXX,                                  _______, _______, _______, _______, _______, _______,
-      INVALID,  W_QUIT,  LGUI(KC_SPC), XXXXXXX, LGUI(KC_ENT),XXXXXXX,                                _______, _______, _______, _______, _______, _______,
-      INVALID, KC_PSCR,LSG(KC_SPC), KC_VOLD, KC_VOLU, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______,
-                                      XXXXXXX, _______, _______, _______, XXXXXXX, _______, _______, _______, _______, _______
+      INVALID,LGUI(KC_Q),LGUI(KC_W),LGUI(KC_E),LGUI(KC_R), INVALID,                                  _______, _______, _______, _______, _______, _______,
+      INVALID,  W_QUIT,  LGUI(KC_SPC), INVALID, LGUI(KC_ENT),XXXXXXX,                                _______, _______, _______, _______, _______, _______,
+      INVALID, KC_PSCR,LSG(KC_SPC), KC_VOLD, KC_VOLU, LSG(KC_E), INVALID, INVALID, _______, _______, _______, _______, _______, _______, _______, _______,
+                                      INVALID, _______, _______, _______, INVALID, _______, _______, _______, _______, _______
     ),
 /*
  * Adjust Layer: Default layer settings, RGB
