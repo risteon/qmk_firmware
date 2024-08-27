@@ -8,8 +8,9 @@ WPM_ENABLE = yes # Enable words per minute calculation
 
 EXTRAKEY_ENABLE = yes
 LTO_ENABLE = yes
-MOUSEKEY_ENABLE = yes
+MOUSEKEY_ENABLE = no
 SLEEP_LED_ENABLE = yes
+TAP_DANCE_ENABLE = yes
 
 CONSOLE_ENABLE = no
 TERMINAL_ENABLE = no

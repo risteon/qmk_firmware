@@ -76,14 +76,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------+-------------.  ,-------------+------+------+------+------+------+--------|
  * |        |   Z  |   X  |   C  |   V  |   B  |      |Adjust|  |Adjust|      |   N  |   M  | ,  < | . >  | /  ? |        |
  * `----------------------+------+------+------+------+------|  |------+------+------+------+------+----------------------'
- *                        | Mute |Ct/Esc| Lower| Shift|      |  |      | Space| Raise|GUI/Bk| Quit |
+ *                        | Mute |Ct/Esc| Lower| Shift|      |  |      | Space| Raise|GUI/Bk|      |
  *                        `----------------------------------'  `----------------------------------'
  */
     [_QWERTY] = LAYOUT(
      INVALID, KC_Q, KC_W, KC_E,     KC_R,    KC_T,                                       KC_Y,   KC_U,    KC_I,    KC_O,   KC_P,   INVALID,
      KC_LALT, KC_A, KC_S, KC_D,     KC_F,    KC_G,                                       KC_H,   KC_J,    KC_K,    KC_L,   KC_SCLN, KC_RALT,
      INVALID, KC_Z, KC_X, KC_C,     KC_V,    KC_B,  INVALID,  ADJUST,  ADJUST, INVALID,  KC_N,  KC_M,    KC_COMM, KC_DOT, KC_SLSH, INVALID,
-                          KC_MUTE, LCTL_T(KC_ESC), LOWER, KC_LSFT, INVALID, INVALID,  KC_SPC, RAISE, LGUI_T(KC_BSPC), W_QUIT
+                          KC_MUTE, LCTL_T(KC_ESC), LOWER, KC_LSFT, INVALID, INVALID,  KC_SPC, RAISE, LGUI_T(KC_BSPC), INVALID
     ),
 
 
@@ -496,9 +496,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         } else {
             // Default: Scrollwheel
             if (clockwise) {
+#    ifdef MOUSEKEY_ENABLE
                 tap_code(KC_WH_U);
+#    else
+                tap_code(KC_RGHT);
+#    endif
             } else {
+#    ifdef MOUSEKEY_ENABLE
                 tap_code(KC_WH_D);
+#    else
+                tap_code(KC_LEFT);
+#    endif
             }
         }
     }
