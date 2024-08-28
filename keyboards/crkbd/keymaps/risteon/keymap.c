@@ -19,14 +19,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
-enum crkbd_layers { _QWERTY, _LOWER, _RAISE, _WINDOW, _NUMPAD, _ADJUST };
+enum crkbd_layers { _QWERTY, _LOWER, _RAISE, _WINDOW, _LEFT_HAND, _ADJUST };
 
-enum crkbd_keycodes { QWERTY = SAFE_RANGE, NUMPAD, ADJUST, BACKLIT, EXT_NUM, EXT_ADJ, TEST_1, TEST_2 };
+enum crkbd_keycodes { QWERTY = SAFE_RANGE, ADJUST, BACKLIT, EXT_NUM, EXT_ADJ, INVALID, TEST_1, TEST_2 };
 
 #define LOWER LT(_LOWER, KC_TAB)
 #define RAISE LT(_RAISE, KC_ENT)
+#define LEFT_HAND OSL(_LEFT_HAND)
 // #define LOWER MO(_LOWER)
 // #define RAISE MO(_RAISE)
+
+// Windows/i3 defines
+#define W_QUIT LGUI(LSFT(KC_Q))
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /* Qwerty
@@ -55,22 +59,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* Lower
      * ,------------------------------------------  ------------------------------------------.
-     * |   ~  |   !  |   @  |   #  |   $  |   %  |  |   ^  |   &  |   *  |   (  |   )  | Bksp |
+     * |      |   !  |   @  |   #  |   $  |   %  |  |   ^  |   &  |   *  |   (  |   )  |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
-     * |   `  | rGUI |+RCTL+|+lALT+|+SHFT+|+rALT+|  |  <-  | DOWN |  UP  |  ->  |   ~  |  |   |
+     * |      |+rGUI+|+RCTL+|+lALT+|+SHFT+|  LH  |  |  <-  | DOWN |  UP  |  ->  |   ~  |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
-     * | Print|  F1  |  F2  |  F3  |  F4  |  F5  |  |  F6  |  `   |  |   | Home | End  |      |
+     * |      |  F1  |  F2  |  F3  |  F4  |  F5  |  |  F6  |  `   |  |   | Home | End  |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
      *                      |      |      |      |  |CtlSft|      |      |
      *                      ----------------------  ----------------------
      */
     [_LOWER] = LAYOUT_split_3x6_3(
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-        KC_TILD, KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC,
+        INVALID, KC_EXLM, KC_AT, KC_HASH, KC_DLR, KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, INVALID,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_GRV, KC_RGUI, OSM(MOD_RCTL), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_TILD, KC_PIPE,
+        INVALID, OSM(MOD_RGUI), OSM(MOD_RCTL), OSM(MOD_LALT), OSM(MOD_LSFT), LEFT_HAND, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, KC_TILD, INVALID,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_PSCR, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_GRV, KC_PIPE, KC_HOME, KC_END, _______,
+        INVALID, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_GRV, KC_PIPE, KC_HOME, KC_END, INVALID,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
         _______, _______, _______, LCTL(KC_LSFT), _______, _______
         //`--------------------------'  `--------------------------'
@@ -80,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,------------------------------------------  ------------------------------------------.
      * |      |   1  |   2  |   3  |   4  |   5  |  |   6  |   7  |   8  |   9  |   0  | Bksp |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
-     * | Del  |   (  |   )  |   {  |   }  | Del  |  |  \   |  -_  |  =+  |   [  |   ]  |  \   |
+     * |      |   (  |   )  |   {  |   }  | Del  |  |  \   |  -_  |  =+  |   [  |   ]  |  \   |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
      * |      |  F7  |  F8  |  F9  |  F10 |  F11 |  |  F12 |   "  |ISO / |Pg Dn |Pg Up |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
@@ -91,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         _______, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSPC,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        KC_DEL, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_DEL, KC_BSLS, KC_MINS, KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
+        INVALID, KC_LPRN, KC_RPRN, KC_LCBR, KC_RCBR, KC_DEL, KC_BSLS, KC_MINS, KC_EQL, KC_LBRC, KC_RBRC, KC_BSLS,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         _______, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_QUOT, KC_NUBS, KC_PGDN, KC_PGUP, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -103,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * ,------------------------------------------  ------------------------------------------.
      * | CAPS |   1  |   2  |   3  |   4  |   5  |  |   6  |   7  |   8  |   9  |   0  |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
-     * | Exit | Quit | FLOAT|+lALT+|+SHFT+|+rALT+|  |  <-  | DOWN |  UP  |  ->  | Exit |      |
+     * | Exit | Quit | FLOAT|      |GU+ENT|      |  |  <-  | DOWN |  UP  |  ->  | Exit |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
-     * |      | Bri- | Bri+ | Vol- | Vol+ |+LCTL+|  |ADJUST|      | Print|  Ins | CAPS |      |
+     * |      | Print|/FLOAT| Vol- | Vol+ | Exit |  |ADJUST|      | Print|  Ins | CAPS |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
      *                      |      |      |      |  |      |      |      |
      *                      ----------------------  ----------------------
@@ -114,14 +118,37 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //,-----------------------------------------------------.                    ,-----------------------------------------------------.
         KC_CAPS, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        LGUI(LSFT(KC_E)), LGUI(LSFT(KC_Q)), LGUI(KC_SPC), OSM(MOD_LALT), OSM(MOD_LSFT), OSM(MOD_RALT), LGUI(LSFT(KC_LEFT)), LGUI(LSFT(KC_DOWN)), LGUI(LSFT(KC_UP)), LGUI(LSFT(KC_RGHT)), LGUI(LSFT(KC_E)), _______,
+        LGUI(LSFT(KC_E)), LGUI(LSFT(KC_Q)), LGUI(KC_SPC), INVALID, LGUI(KC_ENT), INVALID, LGUI(LSFT(KC_LEFT)), LGUI(LSFT(KC_DOWN)), LGUI(LSFT(KC_UP)), LGUI(LSFT(KC_RGHT)), LGUI(LSFT(KC_E)), _______,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        _______, KC_BRID, KC_BRIU, KC_VOLD, KC_VOLU, OSM(MOD_LCTL), ADJUST, _______, KC_PSCR, KC_INS, KC_CAPS, _______,
+        _______, KC_PSCR, LSG(KC_SPC), KC_VOLD, KC_VOLU, LSG(KC_E), ADJUST, _______, KC_PSCR, KC_INS, KC_CAPS, _______,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
         _______, _______, _______, _______, _______, _______
         //`--------------------------'  `--------------------------'
         ),
 
+    /* Left hand control layer
+     *
+     * ,------------------------------------------  ------------------------------------------.
+     * |      | GUI+Q| GUI+W| GUI+E| GUI+R|      |  |      |      |      |      |      |      |
+     * |------+------+------+------+------+------+  +------+------+------+------+------+------|
+     * |      | Quit | FLOAT|      |GU+ENT|      |  |      |      |      |      |      |      |
+     * |------+------+------+------+------+------+  +------+------+------+------+------+------|
+     * |      | Print|/FLOAT| Vol- | Vol+ | Exit |  |      |      |      |      |      |      |
+     * |------+------+------+------+------+------+  +------+------+------+------+------+------|
+     *                      |      |      |      |  |      |      |      |
+     *                      ----------------------  ----------------------
+     */
+    [_LEFT_HAND] = LAYOUT_split_3x6_3(
+        //,-----------------------------------------------------.           ,-----------------------------------------------------.
+        INVALID, LGUI(KC_Q), LGUI(KC_W), LGUI(KC_E), LGUI(KC_R), INVALID, _______, _______, _______, _______, _______, _______,
+        //|--------+--------+--------+--------+--------+--------|           |--------+--------+--------+--------+--------+--------|
+        INVALID, W_QUIT, LGUI(KC_SPC), INVALID, LGUI(KC_ENT), XXXXXXX, _______, _______, _______, _______, _______, _______,
+        //|--------+--------+--------+--------+--------+--------|           |--------+--------+--------+--------+--------+--------|
+        INVALID, KC_PSCR, LSG(KC_SPC), KC_VOLD, KC_VOLU, LSG(KC_E), _______, _______, _______, _______, _______, _______,
+        //|--------+--------+--------+--------+--------+--------|           |--------+--------+--------+--------+--------+--------+--------|
+        INVALID, INVALID, INVALID, _______, _______, _______
+        //`--------------------------'                                      `--------------------------'
+        ),
     /* Adjust
      *                      v---------------------------RGB CONTROL--------------------v
      * ,------------------------------------------  ------------------------------------------.
@@ -129,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
      * | Exit |      |MUSmod| TEST1| TEST2|      |  |      |      |      |      |      |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
-     * |      |      |      |      |      |      |  |      |      |      |      |      |      |
+     * |      | Bri- | Bri+ |      |      |      |  |      |      |      |      |      |      |
      * |------+------+------+------+------+------+  +------+------+------+------+------+------|
      *                      | Exit |      |      |  |      |      |      |
      *                      ----------------------  ----------------------
@@ -140,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
         EXT_ADJ, XXXXXXX, XXXXXXX, TEST_1, TEST_2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, KC_BRID, KC_BRIU, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
         //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
         EXT_ADJ, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
         //`--------------------------'  `--------------------------'
@@ -223,7 +250,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 layer_off(_RAISE);
                 layer_off(_LOWER);
                 layer_off(_WINDOW);
-                layer_off(_NUMPAD);
                 layer_on(_ADJUST);
             }
             return false;
